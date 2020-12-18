@@ -1,0 +1,47 @@
+ server:
+  servlet:
+    context-path: /api
+
+server:
+  port: 8080
+
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /testdb
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;MODE=MYSQL;
+    platform: h2
+    username: admin
+    password: ad1234
+
+
+---
+
+spring:
+  profiles: prod
+
+logging:
+  level:
+    ROOT: info
+
+---
+
+spring:
+  profiles: local
+
+logging:
+  level:
+    ROOT: info
+    org.springframework.web: debug
+    org.springframework.security: debug
+    org.springframework.core: info
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace

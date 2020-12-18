@@ -1,0 +1,110 @@
+/* You can add global styles to this file, and also import other style files */
+body, * {
+    font-family: 'Nanum Gothic';
+}
+body, * {
+    line-height: 170% !important;
+}
+.default-color {
+    background-color: #00c896 !important;
+}
+.secondary-color {
+    background-color: #5c78fd !important;
+}
+div .progress-bar {
+    background-color: #5c78fd !important;
+}
+div .progress-bar.selected {
+    background-color: #5c78fd !important;
+}
+.badge-primary {
+    background-color: #5c78fd !important;
+}
+.card:hover {
+    background-color: #00c896 !important;
+    color: #fff !important;
+    text-align: center !important;
+    cursor: pointer;
+}
+.card-add {
+    background-color: #00c896 !important;
+    color: #fff !important;
+    text-align: center !important;
+}
+.card-selected {
+  border: 2px solid #5c78fd;
+}
+.card-not-opened {
+    color: #b1b1b1;
+    background-color: #e9e8e8;
+}
+.card-not-opened small {
+    color: #b1b1b1 !important;
+}
+.expired-stamp {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 120px;
+    height: 50px;
+    margin: auto;
+}
+.expired-stamp:before {
+    color: #ff635e;
+    font-family: fantasy;
+    font-weight: bolder;
+    content: 'Expired';
+    font-size: xx-large;
+}
+.yet-stamp {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 120px;
+  height: 50px;
+  margin: auto;
+}
+.yet-stamp:before {
+  color: #5c78fd;
+  font-family: fantasy;
+  font-weight: bolder;
+  content: 'Not Opened';
+  font-size: xx-large;
+}
+.form-group:hover input {
+    background-color: #eafaf6 !important;
+}
+.selected {
+    background-color: #eafaf6;
+    color: #15CC9D;
+    font-weight: bold;
+}
+.third-color {
+    background-color: #FFFFFF !important;
+    border: 1px solid #00c896;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #00c896;
+}
+li:hover {
+    background-color: #eafaf6 !important;
+    text-align: center !important;
+    cursor: pointer;
+}
+.disabled {
+  cursor: default !important;
+}
+ol > li {
+  font-size: small;
+}
+ol > li:hover {
+  background-color: #3AA591 !important;
+}
+ol > li.polled {
+  color: #5c78fd !important;
+  font-weight: bold;
+}

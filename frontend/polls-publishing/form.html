@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>투표합시다</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="lib/MDB-Free_4.19.2/img/mdb-favicon.ico" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Google Fonts 나눔고딕 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="lib/MDB-Free_4.19.2/css/bootstrap.min.css">
+    <!-- Material Design Bootstrap -->
+    <link rel="stylesheet" href="lib/MDB-Free_4.19.2/css/mdb.min.css">
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md default-color mdb-color mb-5">
+        <!-- Just an image -->
+        <i class="fas fa-vote-yea navbar-brand"></i>
+        <!-- Breadcrumb-->
+        <div class="mr-auto">
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb d-inline-flex pl-0 pt-0">
+                    <li class="breadcrumb-item"><a class="white-text" href="index.html">Let's Poll</a></li>
+                    <li class="breadcrumb-item active">투표 등록</li>
+                </ol>
+            </nav>
+
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="md-form form-lg">
+            <input type="text" id="inputLGEx" class="form-control form-control-lg" placeholder="어떤 주제로 투표해볼까요?">
+        </div>
+
+        <!-- Horizontal material form -->
+        <form>
+            <!-- Grid row -->
+            <div class="form-group row">
+                <!-- Material input -->
+                <label for="item1" class="col-sm-2 col-form-label">
+                    <a>
+                        <i class="fas fa-trash" style="color: #ff635e;"></i>
+                    </a>
+                </label>
+                <div class="col-sm-10">
+                    <div class="md-form mt-0">
+                        <input type="text" class="form-control" id="item1" placeholder="무엇을 선택할 수 있어요?">
+                    </div>
+                </div>
+            </div>
+            <!-- Grid row -->
+
+            <!-- Grid row -->
+            <div class="form-group row">
+                <!-- Material input -->
+                <label for="item2" class="col-sm-2 col-form-label">2</label>
+                <div class="col-sm-10">
+                    <div class="md-form mt-0">
+                        <input type="text" class="form-control" id="item2" placeholder="무엇을 선택할 수 있어요?">
+                    </div>
+                </div>
+            </div>
+            <!-- Grid row -->
+
+            <!-- Grid row -->
+            <div class="form-group row">
+                <!-- Material input -->
+                <label for="item3" class="col-sm-2 col-form-label">3</label>
+                <div class="col-sm-10">
+                    <div class="md-form mt-0">
+                        <input type="text" class="form-control" id="item3" placeholder="무엇을 선택할 수 있어요?">
+                    </div>
+                </div>
+            </div>
+            <!-- Grid row -->
+
+            <!-- Grid row -->
+            <div class="form-group row">
+                <!-- Material input -->
+                <label for="item3" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10 text-center">
+                    <a style="color: #5c78fd;"><i class="fas fa-plus-circle mr-1"></i></a>
+                </div>
+            </div>
+            <!-- Grid row -->
+        </form>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="md-form md-outline input-with-post-icon datepicker" id="begin-date">
+                    <input placeholder="언제 시작해요?" type="date" id="beginDate" class="form-control">
+                    <label for="beginDate">시작일</label>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="md-form md-outline input-with-post-icon datepicker" id="end-date">
+                    <input placeholder="언제 끝나요?" type="date" id="endDate" class="form-control">
+                    <label for="endDate">종료일</label>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-default default-color btn-lg btn-block"
+                onclick="location.href='detail.html'">
+            등록
+        </button>
+
+
+        <!-- Horizontal material form -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer font-small">
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3" style="color: #959595; background-color: white;">
+            © 한아람 2020 | justxina@hotmail.com
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="lib/MDB-Free_4.19.2/js/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="lib/MDB-Free_4.19.2/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="lib/MDB-Free_4.19.2/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="lib/MDB-Free_4.19.2/js/mdb.min.js"></script>
+</body>
+
+</html>

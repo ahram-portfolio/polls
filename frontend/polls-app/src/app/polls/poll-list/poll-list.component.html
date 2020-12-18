@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="card-columns">
+    <div class="card p-3 mb-3 card-list"
+         *ngFor="let poll of page?.contents;"
+         [routerLink]="['/polls', poll.id, 'view']"
+         [ngClass]="{
+            'card-not-opened': !poll.isOpened,
+            'card-selected': selectedPoll.isEqual(poll) }"
+      >
+      <div *ngIf="!poll.isOpened"
+           [ngClass]="{'expired-stamp': poll.isExpired, 'yet-stamp': !poll.isExpired}"></div>
+      <blockquote class="blockquote mb-0 card-body">
+        <p class="subject">
+          {{poll.subject}}
+          <i class="fas fa-vote-yea" style="float: right"
+             [ngStyle]="selectedPoll.isEqual(poll) ? { color: '#5c78fd' } : null"
+             *ngIf="poll.isOpened"
+             (click)="$event.stopPropagation(); selectPoll(poll);"></i>
+        </p>
+
+        <ng-container *ngIf="selectedPoll.isEqual(poll)">
+          <ol>
+            <li *ngFor="let item of selectedPoll.items;"
+                [ngClass]="{'polled': item.isPolled}"
+                (click)="$event.stopPropagation(); polled(item.id);">
+              {{item.content}}
+            </li>
+          </ol>
+        </ng-container>
+
+        <footer class="blockquote-footer">
+          <small class="period">
+            {{poll.period?.beginDate | date: 'yyMMdd'}} ~
+            {{poll.period?.endDate | date: 'yyMMdd'}},
+          </small>
+          <small class="text-muted">
+            by. <cite title="Source Title">{{poll.creator}}</cite>
+          </small>
+        </footer>
+      </blockquote>
+    </div>
+    <a href="" [routerLink]="['/polls', 'add']" id="add-btn">
+      <div class="card p-3 mb-3 card-add">
+        <i class="fas fa-plus-circle mr-1"></i>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<app-pagination (pageChange)="search($event);"
+                [pageObj]="page"></app-pagination>

@@ -1,0 +1,78 @@
+<form>
+  <!-- 주제 -->
+  <div class="md-form form-lg">
+    <input type="text" id="inputLGEx" class="form-control form-control-lg required" name="subject"
+           placeholder="어떤 주제로 투표해볼까요?"
+           [(ngModel)]="poll.subject"
+           [maxLength]="100">
+  </div>
+  <!-- 주제 -->
+
+  <!-- 항목 -->
+  <div class="form-group row poll-item"
+       *ngFor="let item of poll.items; let i = index;"
+       (mouseover)="setFocusedItem(item);" (mouseleave)="setFocusedItem()">
+    <!-- Material input -->
+    <label for="item{{item.id}}"  class="col-sm-2 col-form-label">
+      <a [ngSwitch]="focusedItem.isEqual(item)">
+        <span *ngSwitchCase="false">{{i+1}}</span>
+        <i class="fas fa-trash" style="color: #ff635e;"
+           *ngSwitchCase="true"
+           (click)="poll.delItem(i);"
+        ></i>
+      </a>
+    </label>
+    <div class="col-sm-10">
+      <div class="md-form mt-0">
+        <input type="text" class="form-control" id="item{{item.id}}"
+               placeholder="무엇을 선택할 수 있어요?" name="item{{item.id}}"
+               [(ngModel)]="item.content">
+      </div>
+    </div>
+  </div>
+  <!-- 항목 -->
+
+  <!-- 항목 추가 버튼 -->
+  <div class="form-group row" *ngIf="poll.canAddItem()">
+    <div class="col-sm-10 text-center">
+      <a style="color: #5c78fd;" (click)="poll.addItem();">
+        <i class="fas fa-plus-circle mr-1"></i>
+      </a>
+    </div>
+  </div>
+  <!-- 항목 추가 버튼 -->
+
+
+  <!-- 투표 기간 -->
+  <div class="row">
+
+    <!-- 시작일 -->
+    <div class="col-sm-6">
+      <div class="md-form md-outline input-with-post-icon datepicker" id="begin-date">
+        <input placeholder="언제 시작해요?" type="date" id="beginDate" class="form-control" name="beginDate"
+               [min]="minDate | date: 'yyyy-MM-dd'"
+               [(ngModel)]="poll.period.beginDate">
+        <label for="beginDate">시작일</label>
+      </div>
+    </div>
+    <!-- 시작일 -->
+
+    <!-- 종료일 -->
+    <div class="col-sm-6">
+      <div class="md-form md-outline input-with-post-icon datepicker" id="end-date">
+        <input placeholder="언제 끝나요?" type="date" id="endDate" class="form-control" name="endDate"
+               [(ngModel)]="poll.period.endDate">
+        <label for="endDate">종료일</label>
+      </div>
+    </div>
+    <!-- 종료일 -->
+
+  </div>
+  <!-- 투표 기간 -->
+
+</form>
+
+<button type="button" class="btn btn-default default-color btn-lg btn-block" id="save-btn"
+        (click)="save();">
+  등록
+</button>

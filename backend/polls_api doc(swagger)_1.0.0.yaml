@@ -1,0 +1,191 @@
+swagger: "2.0"
+info:
+  description: "사용자가 투표를 만들고, 투표할 수 있도록 관리"
+  version: "1.0.0"
+  title: "투표"
+  contact:
+    email: "justxina@hotmail.com"
+tags:
+- name: "poll"
+  description: "투표"
+- name: "user polled"
+  description: "사용자가 항목을 선택하여 투표에 참여함"
+paths:
+  /polls:
+    get:
+      tags:
+      - "poll"
+      summary: "투표를 검색함"
+      operationId: "searchPolls"
+      responses:
+        "200":
+          description: "등록 최신순 정렬"
+          schema:
+            type: object
+            properties:
+              page:
+                type: number
+                example: 0
+              totalPages:
+                type: number
+                example: 3
+              content:
+                type: array
+                items:
+                  $ref: "#/definitions/PollView"
+    post:
+      tags:
+      - "poll"
+      summary: "투표를 등록함"
+      operationId: "addPoll"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "투표를 등록하는 데 필요한 투표 정보"
+        required: true
+        schema:
+          $ref: "#/definitions/PollForm"
+      responses:
+        "200":
+          description: "등록 성공 시, 등록된 투표 아이디 리턴"
+  /polls/{id}:
+    parameters:
+    - name: "id"
+      in: "path"
+      description: "투표 번호"
+      required: true
+      type: number
+    get:
+      tags:
+      - "poll"
+      summary: "투표 상세 정보를 조회함"
+      operationId: "getPoll"
+      responses:
+        "200":
+          description: "조회 성공"
+          schema:
+            allOf:
+              - $ref: "#/definitions/PollView"
+              - type: "object"
+                properties:
+                  polled:
+                    type: "object"
+                    properties:
+                      totalCnt:
+                        type: number
+                      items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            ordering:
+                              type: number
+                              example: 1
+                            content:
+                              type: string
+                              example: "미 참여자 Notification"
+                            isPolled:
+                              type: boolean
+                              example: true
+                            cnt:
+                              type: number
+                              example: 10
+    delete:
+      tags:
+      - "poll"
+      summary: "투표를 삭제함"
+      operationId: "deletePoll"
+      responses:
+        "200":
+          description: "삭제 성공"
+  /polls/{id}/polled:
+    parameters:
+    - name: "id"
+      in: "path"
+      description: "투표 번호"
+      required: true
+      type: number
+    put:
+      tags:
+      - "user polled"
+      summary: "투표에 참여함"
+      operationId: "polled"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "투표하는 항목 번호"
+        required: true
+        schema:
+          type: array
+          items:
+            type: number
+            example: 1
+      responses:
+        "200":
+          description: "투표 성공"
+definitions:
+  PeriodForm:
+    type: "object"
+    properties:
+      begin:
+        type: "string"
+        format: "date"
+        description: "투표 시작일 (기본값 등록일)"
+        example: "2020-01-01"
+      end:
+        type: "string"
+        format: "date"
+        description: "투표 종료일"
+        default: "9999-12-31"
+  PeriodView:
+    allOf:
+      - $ref: "#/definitions/PeriodForm"
+      - type: "object"
+        properties:
+          koStatus:
+            type: "string"
+            enum:
+              - "시작 전"
+              - "진행중"
+              - "종료"
+  PollForm:
+    type: "object"
+    required:
+    - "subject"
+    - "items"
+    properties:
+      subject:
+        type: "string"
+        maxLength: 100
+        example: "투표를 활성화하려면 어떤 기능을 개발해야할까?"
+      items:
+        description: "투표할 수 있는 항목"
+        type: array
+        minLength: 2
+        maxLength: 10
+        uniqueItems: true
+        example: [ 
+          "미 참여자 Notification", 
+          "UI/UX 개선", 
+          "복수 선택 옵션",
+          "무기명 투표 옵션",
+          "정렬 기준 추가"
+        ]
+        items:
+          type: string
+      period:
+        $ref: "#/definitions/PeriodForm"
+  PollView:
+    type: "object"
+    properties:
+      id:
+        type: "number"
+        example: 1
+      subject:
+        type: "string"
+        example: "투표를 활성화하려면 어떤 기능을 개발해야할까?"
+      period:
+        $ref: "#/definitions/PeriodView"
+      creator:
+        type: "string"
+        example: "늘네가궁금해"

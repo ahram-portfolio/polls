@@ -1,0 +1,481 @@
+{
+	"info": {
+		"_postman_id": "01b7c5b6-4b70-441b-88db-fa18e2712c9f",
+		"name": "polls",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "투표 검색",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3d5acf34-1627-4394-a150-f75f2ef4c734",
+						"exec": [
+							"pm.test(\"검색 성공\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/polls",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"polls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "투표 등록",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b163fd6c-df65-48ae-a9f1-7a8fe2049760",
+						"exec": [
+							"pm.test(\"등록 성공\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.environment.set(",
+							"    \"pollId\", ",
+							"    pm.response.json()",
+							");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"subject\": \"1. 투표를 활성화하려면 어떤 기능을 개발해야할까?\",\n  \"items\": [\n    \"미 참여자 Notification\",\n    \"UI/UX 개선\",\n    \"복수 선택 옵션\",\n    \"무기명 투표 옵션\",\n    \"정렬 기준 추가\"\n  ],\n  \"period\": {\n    \"beginDate\": \"2020-12-10\",\n    \"endDate\": null\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/polls",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"polls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "투표 조회",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d15bb606-1b4b-48c1-b838-6887fd3f1244",
+						"exec": [
+							"pm.test(\"조회 성공\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"creator는 늘네생각만해 이다\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.creator).to.eql(\"늘네생각만해\");",
+							"});",
+							"",
+							"pm.test(\"총 투표 건수는 0이다\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.polled.totalCnt).to.eql(0);",
+							"});",
+							"",
+							"pm.test(\"종료일은 9999-12-31이다\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.period.endDate).to.eql(\"9999-12-31\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/polls/{{pollId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"polls",
+						"{{pollId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "투표 삭제",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc7e4694-a8fa-485f-abca-8e6cf5e040e8",
+						"exec": [
+							"pm.test(\"삭제 성공\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/polls/{{pollId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"polls",
+						"{{pollId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "투표 조회 실패 (삭제 확인)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ece1bcdc-4d07-4e9b-930c-5a84699d9777",
+						"exec": [
+							"pm.test(\"조회 실패\", function () {",
+							"    pm.response.to.have.status(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/polls/{{pollId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"polls",
+						"{{pollId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "투표 등록 (2. 기한 만료)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "03de57bd-00af-4716-94c9-b3757cfc805d",
+						"exec": [
+							"pm.test(\"등록 성공\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.environment.set(",
+							"    \"pollId\", ",
+							"    pm.response.json()",
+							");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"subject\": \"2. 투표를 활성화하려면 어떤 기능을 개발해야할까?\",\n  \"items\": [\n    \"미 참여자 Notification\",\n    \"UI/UX 개선\",\n    \"복수 선택 옵션\",\n    \"무기명 투표 옵션\",\n    \"정렬 기준 추가\"\n  ],\n  \"period\": {\n    \"beginDate\": \"2020-01-01\",\n    \"endDate\": \"2020-01-31\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/polls",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"polls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "투표 조회",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2606f13e-0db8-4a44-b913-b1843ac96a5b",
+						"exec": [
+							"pm.test(\"조회 성공\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"기간의 상태는 '종료' 이다.\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.period.koStatus).to.eql(\"종료\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/polls/{{pollId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"polls",
+						"{{pollId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "투표 참여 실패 (기간 지남)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dd5099c3-b122-4cbc-a912-fca25566fd86",
+						"exec": [
+							"pm.test(\"참여 실패\", function () {",
+							"    pm.response.to.have.status(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t1\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/polls/{{pollId}}/polled",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"polls",
+						"{{pollId}}",
+						"polled"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "투표 등록 (3. 중복 항목 등록)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d0556efd-d9fa-4af7-bd94-1ea41abde3f8",
+						"exec": [
+							"pm.test(\"등록 성공\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.environment.set(",
+							"    \"pollId\", ",
+							"    pm.response.json()",
+							");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"subject\": \"3. 투표를 활성화하려면 어떤 기능을 개발해야할까?\",\n  \"items\": [\n    \"미 참여자 Notification\",\n    \"UI/UX 개선\",\n    \"미 참여자 Notification\"\n  ],\n  \"period\": {\n    \"beginDate\": \"2020-12-10\",\n    \"endDate\": \"2020-12-31\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/polls",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"polls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "투표 참여",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b19e53a6-3b4f-4c32-be9b-440943679b59",
+						"exec": [
+							"pm.test(\"참여 성공\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t1\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/polls/{{pollId}}/polled",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"polls",
+						"{{pollId}}",
+						"polled"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "투표 조회",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ea6c06e-6ac2-4040-80ae-036f8ffcc77d",
+						"exec": [
+							"pm.test(\"조회 성공\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"항목의 개수는 2개이다.\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.polled.items.length).to.eql(2);",
+							"});",
+							"",
+							"pm.test(\"총 참여 투표 수는 1이다.\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.polled.totalCnt).to.eql(1);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/polls/{{pollId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"polls",
+						"{{pollId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "투표 검색",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9198d8c1-0ed7-470c-a175-e7a5e402f79c",
+						"exec": [
+							"pm.test(\"검색 성공\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/polls",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"polls"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

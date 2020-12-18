@@ -1,0 +1,113 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/frontend/polls-app/dist
+/frontend/polls-app/tmp
+/frontend/polls-app/out-tsc
+# Only exists if Bazel was run
+/frontend/polls-app/bazel-out
+
+# dependencies
+/frontend/polls-app/node_modules
+
+# profiling files
+/frontend/polls-app/chrome-profiler-events*.json
+/frontend/polls-app/speed-measure-plugin*.json
+
+# IDEs and editors
+/frontend/polls-app/.idea
+/frontend/polls-app/.project
+/frontend/polls-app/.classpath
+/frontend/polls-app/.c9/
+/frontend/polls-app/*.launch
+/frontend/polls-app/.settings/
+/frontend/polls-app/*.sublime-workspace
+
+# IDE - VSCode
+/frontend/polls-app/.vscode/*
+/frontend/polls-app/!.vscode/settings.json
+/frontend/polls-app/!.vscode/tasks.json
+/frontend/polls-app/!.vscode/launch.json
+/frontend/polls-app/!.vscode/extensions.json
+/frontend/polls-app/.history/*
+
+# misc
+/frontend/polls-app/.sass-cache
+/frontend/polls-app//connect.lock
+/frontend/polls-app/coverage
+/frontend/polls-app/libpeerconnection.log
+/frontend/polls-app/npm-debug.log
+/frontend/polls-app/yarn-error.log
+/frontend/polls-app/testem.log
+/frontend/polls-app/typings
+
+# System Files
+/frontend/polls-app/.DS_Store
+/frontend/polls-app/Thumbs.db
+
+
+
+
+---
+
+
+/backend/polls-api/HELP.md
+/backend/polls-api/target/
+/backend/polls-api/!.mvn/wrapper/maven-wrapper.jar
+/backend/polls-api/!**/src/main/**/target/
+/backend/polls-api/!**/src/test/**/target/
+
+### STS ###
+/backend/polls-api/.apt_generated
+/backend/polls-api/.classpath
+/backend/polls-api/.factorypath
+/backend/polls-api/.project
+/backend/polls-api/.settings
+/backend/polls-api/.springBeans
+/backend/polls-api/.sts4-cache
+
+### IntelliJ IDEA ###
+/backend/polls-api/.idea
+/backend/polls-api/*.iws
+/backend/polls-api/*.iml
+/backend/polls-api/*.ipr
+
+### NetBeans ###
+/backend/polls-api/nbproject/private/
+/backend/polls-api/nbbuild/
+/backend/polls-api/dist/
+/backend/polls-api/nbdist/
+/backend/polls-api/.nb-gradle/
+/backend/polls-api/build/
+/backend/polls-api/!**/src/main/**/build/
+/backend/polls-api/!**/src/test/**/build/
+
+### VS Code ###
+/backend/polls-api/.vscode/
+
+
+
+
+----
+
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# System Files
+.DS_Store
+Thumbs.db

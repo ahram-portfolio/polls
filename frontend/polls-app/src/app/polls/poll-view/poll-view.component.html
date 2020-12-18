@@ -1,0 +1,60 @@
+<div class="jumbotron">
+  <h2 class="h1-responsive text-center">
+    {{poll.subject}}
+  </h2>
+  <ng-container *ngIf="poll.isExpired">
+    <h2 class="h1-responsive text-center" style="color: #5c78fd; font-weight: bold;">
+    <span class="poll-results" *ngFor="let item of poll.mostPolledItems; let i = index;">
+      {{item.content}} {{i < poll.mostPolledItems.length -1 && ', ' || ''}}
+    </span>
+    </h2>
+  </ng-container>
+  <hr class="my-2">
+  <div class="row">
+    <div class="col-sm-8">
+      <p style="text-align: left;">
+        <i class="fas fa-calendar input-prefix"></i>
+        {{poll.period?.beginDate | date: 'yyyy-MM-dd'}} ~
+        {{poll.period?.endDate | date: 'yyyy-MM-dd'}}
+      </p>
+    </div>
+    <div class="col-sm-4">
+      <h6 style="text-align: right;">by. {{poll.creator}}</h6>
+    </div>
+  </div>
+  <br>
+
+  <ul class="list-group">
+    <ng-container *ngFor="let item of poll.items;">
+      <li class="list-group-item d-flex justify-content-between align-items-center poll-item"
+          [ngClass]="{'selected': item.isPolled}"
+          [ngStyle]="!poll.isOpened ? { cursor: 'not-allowed' } : null"
+          (click)="polled(item.id)">
+        {{item.content}}
+        <span class="badge badge-primary badge-pill">{{item.polledCnt  || ''}}</span>
+      </li>
+      <div class="progress" style="height: 3px; border: none;">
+        <div class="progress-bar" role="progressbar"
+             [style]="{width: poll.getPolledPercentByItem(item.polledCnt) + '%'}"
+             aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </ng-container>
+  </ul>
+  <p class="text-right" style="color: #b1b1b1">총 투표 수: {{poll.polledTotalCnt}}</p>
+  <br>
+
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <button type="button" class="btn btn-default third-color" id="del-btn"
+              *ngIf="isMyPoll()"
+              (click)="delPoll();">
+        삭제
+      </button>
+      <button type="button" class="btn btn-default default-color" id="list-btn"
+              [routerLink]="['/polls']">
+        목록
+      </button>
+    </div>
+  </div>
+  <br>
+</div>
