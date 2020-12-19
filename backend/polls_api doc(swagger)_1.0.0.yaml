@@ -127,12 +127,12 @@ definitions:
   PeriodForm:
     type: "object"
     properties:
-      begin:
+      beginDate:
         type: "string"
         format: "date"
         description: "투표 시작일 (기본값 등록일)"
         example: "2020-01-01"
-      end:
+      endDate:
         type: "string"
         format: "date"
         description: "투표 종료일"

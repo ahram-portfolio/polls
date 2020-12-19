@@ -44,8 +44,8 @@ export class Period {
 
   mapToForm() {
     return {
-      begin: this._beginDate,
-      end: this._endDate
+      beginDate: this._beginDate,
+      endDate: this._endDate
     };
   }
 
